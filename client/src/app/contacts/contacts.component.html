@@ -1,0 +1,48 @@
+<div class="container">
+  <h2 class="page-header"> Add Contact</h2>
+  <form (submit)="updateAddContact()">
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" [(ngModel)]="first_name" name="first_name" data-ng-model="firstname" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" [(ngModel)]="last_name" name="last_name" data-ng-model="lastname" class="form-control">
+    </div>
+    <div *ngIf="updateflag; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="text" [(ngModel)]="phone" name="phone" data-ng-model="phone" class="form-control" required readonly>
+      </div>
+      <input type="submit" class="btn btn btn-warning" value="Update">
+    </ng-template>
+    <ng-template #elseBlock>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="text" [(ngModel)]="phone" name="phone" data-ng-model="phone" class="form-control" required>
+      </div>
+      <input type="submit" class="btn btn btn-success" value="Add">
+    </ng-template>
+  </form>
+</div>
+<hr>
+<div class="container">
+  <div *ngFor="let contact of contacts">
+    <div class="col-md-3">
+      {{contact.first_name}}
+    </div>
+    <div class="col-md-3">
+      {{contact.last_name}}
+    </div>
+    <div class="col-md-3">
+      {{contact.phone}}
+    </div>
+    <div class="col-md-3">
+      <input type="button" (click)="loadUpdateForm(contact)" value="Edit" class="btn btn-warning">
+    </div>
+    <div class="col-md-3">
+      <input type="button" (click)="deleteContact(contact.phone)" value="Delete" class="btn btn-danger">
+    </div>
+  </div>
+</div>
